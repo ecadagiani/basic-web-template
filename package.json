@@ -1,0 +1,36 @@
+{
+  "name": "basic-web-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp && docker-compose up -d && gulp watch",
+    "build": "gulp",
+    "stop": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:ecadagiani/basic-web-template.git"
+  },
+  "author": "Eden Cadagiani <e.cadagiani@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/ecadagiani/basic-web-template/issues"
+  },
+  "homepage": "https://github.com/ecadagiani/basic-web-template#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.13.15",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "del": "^6.0.0",
+    "fibers": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-file": "^0.4.0",
+    "gulp-include": "^2.4.1",
+    "gulp-sass": "^4.1.0",
+    "rollup": "^2.45.2",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.32.10"
+  }
+}
