@@ -16,6 +16,10 @@ To stop: run `npm run stop`
 
 
 ## Features
+### Handlebars HTML
+The HTML build use handlebar [https://handlebarsjs.com/](), you can put your data in `data.json`,
+add some helpers functions in `handlebarHelpers.js`, and your partials in the folder `src/partials`.
+
 ### SASS
 This template use dart-sass [https://sass-lang.com/dart-sass]() to build css,
 you can use all features and syntax (ex: `@use foo`). Use relative path `my/path/toStyle`.
@@ -23,10 +27,6 @@ you can use all features and syntax (ex: `@use foo`). Use relative path `my/path
 ### Javascript
 The template build an minified javascript with Babel and rollup. You can use all the recent syntax, and import files.
 Use relative path like: `import data from "./my/path/data.js";`. You can import json too.
-
-### Splitting HTML
-You can split your html. Put the html part in `src/html` folder, and the page directly in `src`.
-Use `<!--=include ./html/myPartial.html -->` to import html.
 
 
 ## QA

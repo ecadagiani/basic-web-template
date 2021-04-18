@@ -1,15 +1,18 @@
 const gulp            = require( "gulp" );
-const include         = require( "gulp-include" );
 const sass            = require( "gulp-sass" );
 const Fiber           = require( "fibers" );
 const del             = require( "del" );
 const file            = require( "gulp-file" );
+const handlebars      = require( "gulp-compile-handlebars" );
+const rename          = require( "gulp-rename" );
 const { rollup }      = require( "rollup" );
 const commonjs        = require( "@rollup/plugin-commonjs" );
 const { nodeResolve } = require( "@rollup/plugin-node-resolve" );
 const { babel }       = require( "@rollup/plugin-babel" );
 const json            = require( "@rollup/plugin-json" );
 const { terser }      = require( "rollup-plugin-terser" );
+
+const handleBarHelpers = require( "./handlebarHelpers" );
 
 sass.compiler = require( "sass" );
 
@@ -18,9 +21,17 @@ function cleanDist() {
 }
 
 function buildHTML() {
-    return gulp.src( "src/*.html" )
-        .pipe( include() )
-        .pipe( gulp.dest( "dist/" ) );
+    const templateData = require( "./data.json" );
+    const options      = {
+        ignorePartials: true,
+        batch:          ["./src/partials"],
+        helpers:        handleBarHelpers,
+    };
+
+    return gulp.src( "src/*.handlebars" )
+        .pipe( handlebars( templateData, options ) )
+        .pipe( rename( { extname: ".html" } ) )
+        .pipe( gulp.dest( "dist" ) );
 }
 
 function buildAssets() {
@@ -34,7 +45,7 @@ function buildStyle() {
         .pipe( gulp.dest( "dist/style/" ) );
 }
 
-function buildScript({format = "es"}) { //format: es, umd, cjs, iife
+function buildScript( { format = "es" } ) { //format: es, umd, cjs, iife
     return () => rollup( {
         input:   "src/scripts/main.js", // notre fichier source au format ESM
         plugins: [
@@ -67,10 +78,10 @@ function watch() {
     gulp.watch( "src/html/**.html", buildHTML );
     gulp.watch( "src/assets/**", buildAssets );
     gulp.watch( "src/style/**.scss", buildStyle );
-    gulp.watch( "src/scripts/**/*", buildScript({format: 'es'}) );
+    gulp.watch( "src/scripts/**/*", buildScript( { format: "es" } ) );
 }
 
 
 exports.clean   = cleanDist;
 exports.watch   = gulp.series( watch );
-exports.default = gulp.series( cleanDist, buildHTML, buildAssets, buildStyle, buildScript({format: 'iife'}), buildScript({format: 'es'}) );
+exports.default = gulp.series( cleanDist, buildHTML, buildAssets, buildStyle, buildScript( { format: "iife" } ), buildScript( { format: "es" } ) );
