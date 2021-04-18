@@ -74,8 +74,8 @@ function buildScript( { format = "es" } ) { //format: es, umd, cjs, iife
 }
 
 function watch() {
-    gulp.watch( "src/*.html", buildHTML );
-    gulp.watch( "src/html/**.html", buildHTML );
+    gulp.watch( "src/*.handlebars", buildHTML );
+    gulp.watch( "src/partials/**.handlebars", buildHTML );
     gulp.watch( "src/assets/**", buildAssets );
     gulp.watch( "src/style/**.scss", buildStyle );
     gulp.watch( "src/scripts/**/*", buildScript( { format: "es" } ) );

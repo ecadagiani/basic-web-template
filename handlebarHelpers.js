@@ -1,3 +1,4 @@
 module.exports = {
-    capitals : (str) => str.toUpperCase()
+    capitals : (str) => str.toUpperCase(),
+    isDefined: v => v !== undefined,
 }
