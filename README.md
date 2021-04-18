@@ -28,6 +28,10 @@ you can use all features and syntax (ex: `@use foo`). Use relative path `my/path
 The template build an minified javascript with Babel and rollup. You can use all the recent syntax, and import files.
 Use relative path like: `import data from "./my/path/data.js";`. You can import json too.
 
+### Assets responsive
+You can resize the pictures (jpg, jpeg, png) in folder `src/assets/images`, just update the file `imagesResizeConfig.json`.
+Here: [https://www.npmjs.com/package/gulp-responsive]() you can have access to the documentation of the config.
+
 
 ## QA
 
