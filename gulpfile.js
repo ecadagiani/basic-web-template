@@ -36,6 +36,12 @@ function buildHTML() {
 }
 
 
+function buildOtherFiles() {
+    return gulp.src( "src/*.!(handlebars)" )
+        .pipe( gulp.dest( "dist" ) );
+}
+
+
 function buildAssets( cb ) {
     const imagesResizeConfig = require( "./imagesResizeConfig.json" );
     gulp.src( "src/assets/**" )
@@ -84,6 +90,7 @@ function buildScript( { format = "es" } ) { //format: es, umd, cjs, iife
 }
 
 function watch() {
+    gulp.watch( "src/*.!(handlebars)", buildOtherFiles );
     gulp.watch( "{data.json,handlebarHelpers.js,src/partials/**.handlebars,src/*.handlebars}", buildHTML );
     gulp.watch( "{imagesResizeConfig.json,src/assets/**/*}", buildAssets );
     gulp.watch( "src/style/**.scss", buildStyle );
@@ -93,4 +100,4 @@ function watch() {
 
 exports.clean   = cleanDist;
 exports.watch   = gulp.series( watch );
-exports.default = gulp.series( cleanDist, buildHTML, buildAssets, buildStyle, buildScript( { format: "iife" } ), buildScript( { format: "es" } ) );
+exports.default = gulp.series( cleanDist, buildOtherFiles, buildHTML, buildAssets, buildStyle, buildScript( { format: "iife" } ), buildScript( { format: "es" } ) );
