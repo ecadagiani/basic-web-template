@@ -37,7 +37,7 @@ function buildHTML() {
 
 
 function buildOtherFiles() {
-    return gulp.src( "src/*.!(handlebars)" )
+    return gulp.src( "src/{*.!(handlebars),.!(handlebars)}" )
         .pipe( gulp.dest( "dist" ) );
 }
 
@@ -90,7 +90,7 @@ function buildScript( { format = "es" } ) { //format: es, umd, cjs, iife
 }
 
 function watch() {
-    gulp.watch( "src/*.!(handlebars)", buildOtherFiles );
+    gulp.watch( "src/{*.!(handlebars),.!(handlebars)}", buildOtherFiles );
     gulp.watch( "{data.json,handlebarHelpers.js,src/partials/**.handlebars,src/*.handlebars}", buildHTML );
     gulp.watch( "{imagesResizeConfig.json,src/assets/**/*}", buildAssets );
     gulp.watch( "src/style/**.scss", buildStyle );
