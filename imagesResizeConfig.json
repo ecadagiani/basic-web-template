@@ -1,6 +1,10 @@
-{
-    "example.png": {
-        "quality": 60,
-        "width": 1000
+[
+    {
+        "name": "test.jpg",
+        "width": 1920,
+        "quality": 50,
+        "withoutEnlargement": true,
+        "format": "webp",
+        "rename": "test-1920.webp"
     }
-}
+]

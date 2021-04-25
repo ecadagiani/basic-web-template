@@ -42,16 +42,18 @@ function buildOtherFiles() {
 }
 
 
-function buildAssets( cb ) {
+async function buildAssets( cb ) {
     const imagesResizeConfig = require( "./imagesResizeConfig.json" );
-    gulp.src( "src/assets/**/*.!(png|jpg|jpeg)" )
-        .pipe( gulp.dest( "dist/assets/" ) )
-        .on( "end", () => {
-            gulp.src( "src/assets/images/**/*.{png,jpg,jpeg}" )
-                .pipe( responsive( imagesResizeConfig ) )
-                .pipe( gulp.dest( "dist/assets/images" ) )
-                .on( "end", cb );
-        } );
+    await new Promise(resolve => {
+        gulp.src( "src/assets/**/*" )
+            .pipe( gulp.dest( "dist/assets/" ) )
+            .on( "end", resolve );
+    });
+    await del( "dist/assets/images/**/*.{png,jpg,jpeg}" );
+    gulp.src( "src/assets/images/**/*.{png,jpg,jpeg}" )
+        .pipe( responsive( imagesResizeConfig ) )
+        .pipe( gulp.dest( "dist/assets/images" ) )
+        .on( "end", cb );
 }
 
 
