@@ -44,7 +44,7 @@ function buildOtherFiles() {
 
 function buildAssets( cb ) {
     const imagesResizeConfig = require( "./imagesResizeConfig.json" );
-    gulp.src( "src/assets/**" )
+    gulp.src( "src/assets/**/*.!(png|jpg|jpeg)" )
         .pipe( gulp.dest( "dist/assets/" ) )
         .on( "end", () => {
             gulp.src( "src/assets/images/**/*.{png,jpg,jpeg}" )
